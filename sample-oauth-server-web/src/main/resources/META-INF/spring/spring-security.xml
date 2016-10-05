@@ -16,7 +16,17 @@
         <sec:session-management />
     </sec:http>
 
-    <sec:authentication-manager />
+    <sec:authentication-manager>
+    	<sec:authentication-provider
+    		user-service-ref="userDetailsService">
+    		<sec:password-encoder ref="passwordEncoder" />
+    	</sec:authentication-provider>
+    </sec:authentication-manager>
+    
+    <bean id="userDetailsService"
+    	class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+    	<property name="dataSource" ref="dataSource" />
+    </bean>
 
     <!-- CSRF Protection -->
     <bean id="accessDeniedHandler"
