@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.oauth.domain.repository.client.ClientRepository">
+
+    <resultMap id="clientResultMap" type="Client">
+        <id property="clientId" column="client_id" />
+        <result property="clientSecret" column="client_secret" />
+        <result property="clientName" column="client_name" />
+        <collection property="scopes" ofType="Scope">
+        	<result property="scope" column="scope" />
+        </collection>
+        <collection property="resourceIds" ofType="java.lang.String">
+        	<result column="resource_id" />
+        </collection>
+        <collection property="grants" ofType="Grant">
+        	<result property="grant" column="grant" />
+        </collection>
+        <collection property="redirectUris" ofType="java.lang.String">
+        	<result column="redirect_url" />
+        </collection>
+        <collection property="roles" ofType="Role">
+        	<result property="role" column="authority" />
+        </collection>
+    </resultMap>
+
+    <select id="findOne" parameterType="String" resultMap="clientResultMap">
+        SELECT
+            c.client_id,
+            c.client_secret,
+            c.client_name,
+            s.scope,
+            r.resource_id,
+            g.grant,
+            ru.redirect_url,
+            ca.authority
+        FROM
+            ((((( clients c
+        LEFT JOIN
+        	scopes s ON s.client_id = c.client_id)
+        LEFT JOIN
+        	resources r ON r.client_id = c.client_id)
+        LEFT JOIN
+        	grants g ON g.client_id = c.client_id)
+        LEFT JOIN
+        	redirect_urls ru ON ru.client_id = c.client_id)
+        LEFT JOIN
+        	client_authorities ca ON ca.client_id = c.client_id)
+        WHERE
+            c.client_id = #{clientId}
+    </select>
+</mapper>

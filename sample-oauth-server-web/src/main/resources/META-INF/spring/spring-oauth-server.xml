@@ -27,10 +27,4 @@
 		<constructor-arg ref="clientDetailsService"/>
 	</bean>
 
-	<oauth2:client-details-service id="clientDetailsService">
-		<oauth2:client client-id="testClient"
-			secret="testClientSecret"
-			scope="read"
-			authorized-grant-types="password"/>
-	</oauth2:client-details-service>
 </beans>
