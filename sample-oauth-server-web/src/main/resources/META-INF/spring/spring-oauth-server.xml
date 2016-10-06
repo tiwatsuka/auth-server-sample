@@ -19,7 +19,9 @@
 	</oauth2:authorization-server>
 
 	<sec:authentication-manager id="clientAuthenticationManager">
-		<sec:authentication-provider user-service-ref="clientDetailsUserService" />
+		<sec:authentication-provider user-service-ref="clientDetailsUserService">
+			<sec:password-encoder ref="passwordEncoder"/>
+		</sec:authentication-provider>
 	</sec:authentication-manager>
 
 	<bean id="clientDetailsUserService"
