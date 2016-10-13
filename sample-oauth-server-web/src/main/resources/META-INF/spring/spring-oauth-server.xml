@@ -9,12 +9,14 @@
         http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd
     ">
 
-	<sec:http pattern="/oauth/*token*/**"
+	<sec:http pattern="/oauth/token/**"
 		authentication-manager-ref="clientAuthenticationManager">
 		<sec:http-basic />
+		<sec:csrf disabled="true"/>
 	</sec:http>
 
-	<oauth2:authorization-server client-details-service-ref="clientDetailsService">
+	<oauth2:authorization-server client-details-service-ref="clientDetailsService"
+		token-services-ref="tokenServices">
 		<oauth2:password />
 	</oauth2:authorization-server>
 
@@ -29,4 +31,14 @@
 		<constructor-arg ref="clientDetailsService"/>
 	</bean>
 
+	<bean id="checkTokenEndpoint" class="org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint">
+		<constructor-arg ref="tokenServices" />
+	</bean>
+
+	<bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
+		<property name="tokenStore" ref="tokenStore" />
+		<property name="clientDetailsService" ref="clientDetailsService" />
+	</bean>
+
+	<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" />
 </beans>
