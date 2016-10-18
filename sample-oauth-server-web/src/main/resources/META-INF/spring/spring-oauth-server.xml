@@ -16,7 +16,8 @@
 	</sec:http>
 
 	<oauth2:authorization-server client-details-service-ref="clientDetailsService"
-		token-services-ref="tokenServices">
+		token-services-ref="tokenServices"
+		check-token-enabled="true">
 		<oauth2:password />
 	</oauth2:authorization-server>
 
@@ -29,10 +30,6 @@
 	<bean id="clientDetailsUserService"
 		class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
 		<constructor-arg ref="clientDetailsService"/>
-	</bean>
-
-	<bean id="checkTokenEndpoint" class="org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint">
-		<constructor-arg ref="tokenServices" />
 	</bean>
 
 	<bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
