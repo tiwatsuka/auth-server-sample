@@ -132,4 +132,6 @@
         <property name="trimTokens" value="false" />
     </bean>
 
+    <mvc:view-controller path="/login" view-name="login" />
+
 </beans>

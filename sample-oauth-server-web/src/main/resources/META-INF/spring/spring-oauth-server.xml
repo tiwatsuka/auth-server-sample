@@ -17,7 +17,9 @@
 
 	<oauth2:authorization-server client-details-service-ref="clientDetailsService"
 		token-services-ref="tokenServices"
-		check-token-enabled="true">
+		check-token-enabled="true" >
+		<oauth2:authorization-code/>
+		<oauth2:client-credentials />
 		<oauth2:password />
 	</oauth2:authorization-server>
 

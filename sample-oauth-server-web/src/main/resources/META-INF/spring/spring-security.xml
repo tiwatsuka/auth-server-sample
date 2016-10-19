@@ -9,12 +9,21 @@
 
     <sec:http pattern="/resources/**" security="none"/>
     <sec:http>
-        <sec:form-login/>
-        <sec:logout/>
+        <sec:form-login
+            login-page="/login"
+            authentication-failure-url="/login?error=true"
+            login-processing-url="/authenticate" />
+        <sec:logout
+            logout-url="/logout"
+            logout-success-url="/"
+            delete-cookies="JSESSIONID" />
         <sec:access-denied-handler ref="accessDeniedHandler"/>
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
         <sec:session-management />
         <sec:csrf disabled="true"/>
+        <sec:intercept-url pattern="/login" access="permitAll" />
+        <sec:intercept-url pattern="/oauth/check_token" access="permitAll" />
+        <sec:intercept-url pattern="/**" access="isAuthenticated()" />
     </sec:http>
 
     <sec:authentication-manager>
