@@ -9,6 +9,7 @@ INSERT INTO scopes(client_id, scope) VALUES('testClient', 'READ');
 INSERT INTO resources(client_id, resource_id) VALUES('testClient', 'testResource');
 INSERT INTO grants(client_id, grant) VALUES('testClient', 'AUTHORIZATION_CODE');
 INSERT INTO grants(client_id, grant) VALUES('testClient', 'CLIENT_CREDENTIALS');
+INSERT INTO grants(client_id, grant) VALUES('testClient', 'CUSTOM');
 INSERT INTO redirect_urls(client_id, redirect_url) VALUES('testClient', 'http://localhost:8080/sample-oauth-client-web/');
 INSERT INTO client_authorities(client_id, authority) VALUES('testClient', 'USER');
 commit;

@@ -21,6 +21,7 @@
 		<oauth2:authorization-code/>
 		<oauth2:client-credentials />
 		<oauth2:password />
+		<oauth2:custom-grant token-granter-ref="customTokenGranter"/>
 	</oauth2:authorization-server>
 
 	<sec:authentication-manager id="clientAuthenticationManager">
@@ -40,4 +41,11 @@
 	</bean>
 
 	<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" />
+
+	<bean id="customTokenGranter" class="org.example.oauth.app.oauth.CustomTokenGranter" >
+		<constructor-arg ref="tokenServices" />
+		<constructor-arg ref="clientDetailsService" />
+		<constructor-arg ref="oAuth2AuthorizationRequestManager" />
+		<constructor-arg value="http://hogehoge" />
+	</bean>
 </beans>

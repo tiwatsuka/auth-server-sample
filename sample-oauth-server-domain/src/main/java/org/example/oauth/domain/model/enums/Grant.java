@@ -5,7 +5,8 @@ public enum Grant {
 	IMPLICIT("implicit"),
 	REFRESH_TOKEN("refresh_token"),
 	CLIENT_CREDENTIALS("client_credentials"),
-	PASSWORD("password");
+	PASSWORD("password"),
+	CUSTOM("http://hogehoge");
 	
 	private String value;
 	
