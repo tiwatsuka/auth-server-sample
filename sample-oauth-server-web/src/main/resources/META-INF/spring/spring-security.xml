@@ -20,9 +20,7 @@
         <sec:access-denied-handler ref="accessDeniedHandler"/>
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
         <sec:session-management />
-        <sec:csrf disabled="true"/>
         <sec:intercept-url pattern="/login" access="permitAll" />
-        <sec:intercept-url pattern="/oauth/check_token" access="permitAll" />
         <sec:intercept-url pattern="/**" access="isAuthenticated()" />
     </sec:http>
 

@@ -9,7 +9,8 @@
         http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd
     ">
 
-	<sec:http pattern="/oauth/token/**"
+	<sec:http pattern="/oauth/check_token" security="none" />
+	<sec:http pattern="/oauth/*token*/**"
 		authentication-manager-ref="clientAuthenticationManager">
 		<sec:http-basic />
 		<sec:csrf disabled="true"/>
