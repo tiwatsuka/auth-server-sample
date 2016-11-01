@@ -17,8 +17,7 @@
 	</sec:http>
 
 	<oauth2:authorization-server client-details-service-ref="clientDetailsService"
-		token-services-ref="tokenServices"
-		check-token-enabled="true" >
+		token-services-ref="tokenServices" >
 		<oauth2:authorization-code/>
 		<oauth2:client-credentials />
 		<oauth2:password />
@@ -49,4 +48,11 @@
 		<constructor-arg ref="oAuth2AuthorizationRequestManager" />
 		<constructor-arg value="http://hogehoge" />
 	</bean>
+
+	<bean id="checkTokenEndpoint" class="org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint">
+		<constructor-arg ref="tokenServices" />
+		<property name="accessTokenConverter" ref="tokenConverter" />
+	</bean>
+
+	<bean id="tokenConverter" class="org.example.oauth.app.common.security.oauth2.AuthenticationAccessTokenConverter" />
 </beans>
